@@ -131,6 +131,32 @@ go
 alter table cobro
 drop constraint PK_Cobro;
 
+-- 11. Crear de nuevo
 alter table cobro
 add constraint PK_Cobro
 primary key (idCobro);
+
+-- 12. Crear FK
+alter table restaurant
+drop constraint fk_restaurant_tipores;
+
+alter table restaurant add constraint fk_restaurant_tipores
+foreign key (idTipo) references tipo_restaurant(idTipo);
+
+alter table restaurant add constraint fk_restaurant_ciudad
+foreign key (idCiudad) references ciudad (idCiudad);
+
+alter table reservacion add constraint fk_reserva_cliente
+foreign key (idCliente) references cliente (idCliente);
+
+alter table reservacion add constraint fk_reserva_restaurant
+foreign key (idRestaurant) references Restaurant(idRestaurant);
+
+alter table cobro add constraint fk_cobre_reserva
+foreign key (idReserva) references reservacion (idReserva);
+
+-- correcciòn de errores creacion de diagrama de base de datos
+drop table Articulo;
+drop table DetalleVenta;
+drop table Usuario;
+drop table Ventas;
